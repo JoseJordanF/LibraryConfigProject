@@ -73,8 +73,7 @@ class JConfig {
     }
 
     fun getString(key: String): String? {
-        var res: String? = null
-        res = config.getString(key)
+        var res: String?= config.getString(key)
         return res
     }
 }
