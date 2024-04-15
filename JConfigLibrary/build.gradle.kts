@@ -16,7 +16,7 @@ java {
 dependencies {
     //Configuration
     implementation("com.typesafe:config:1.4.3")
-    implementation("io.github.cdimascio:dotenv-java:3.0.0")
+    implementation("io.github.cdimascio:dotenv-java:2.3.2")
     implementation("org.yaml:snakeyaml:2.2")
 }
 
