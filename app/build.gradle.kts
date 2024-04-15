@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "com.app.libraryconfigproject"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "com.app.libraryconfigproject"
