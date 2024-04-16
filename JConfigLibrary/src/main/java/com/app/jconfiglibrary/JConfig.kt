@@ -72,8 +72,25 @@ class JConfig {
         return res
     }
 
+    fun envVarFilter(filter: String): Boolean {
+        var res = true
+
+        try {
+            val dotenv = Dotenv.configure().ignoreIfMalformed().load()
+            val envMap = dotenv.entries().associateBy({ it.key }, { it.value })
+            val filteredMap = envMap.filter { it.key.contains(filter) }
+            val properties = Properties()
+            properties.putAll(filteredMap)
+            config = ConfigFactory.parseProperties(properties)
+        } catch (e: RuntimeException) {
+            res = false
+        }
+
+        return res
+    }
+
     fun getString(key: String): String? {
-        var res: String?= config.getString(key)
+        val res: String? = config.getString(key)
         return res
     }
 }
