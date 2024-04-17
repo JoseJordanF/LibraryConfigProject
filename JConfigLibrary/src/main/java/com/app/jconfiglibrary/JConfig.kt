@@ -76,12 +76,17 @@ class JConfig {
         var res = true
 
         try {
-            val dotenv = Dotenv.configure().ignoreIfMalformed().load()
-            val envMap = dotenv.entries().associateBy({ it.key }, { it.value })
-            val filteredMap = envMap.filter { it.key.contains(filter) }
-            val properties = Properties()
-            properties.putAll(filteredMap)
-            config = ConfigFactory.parseProperties(properties)
+            val systemVar = System.getenv()
+            val filteredMap = systemVar.filter { it.key.contains(filter) }
+            println(filteredMap)
+            if (filteredMap.isEmpty()){
+                res = false
+            }else{
+                val properties = Properties()
+                properties.putAll(filteredMap)
+                config = ConfigFactory.parseProperties(properties)
+            }
+
         } catch (e: RuntimeException) {
             res = false
         }
