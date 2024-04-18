@@ -78,7 +78,27 @@ class JConfig {
         try {
             val systemVar = System.getenv()
             val filteredMap = systemVar.filter { it.key.contains(filter) }
-            println(filteredMap)
+            if (filteredMap.isEmpty()){
+                res = false
+            }else{
+                val properties = Properties()
+                properties.putAll(filteredMap)
+                config = ConfigFactory.parseProperties(properties)
+            }
+
+        } catch (e: RuntimeException) {
+            res = false
+        }
+
+        return res
+    }
+
+    fun propVarFilter(filter: String): Boolean {
+        var res = true
+
+        try {
+            val systemVar = System.getProperties()
+            val filteredMap = systemVar.filter { it.key.toString().contains(filter) }
             if (filteredMap.isEmpty()){
                 res = false
             }else{
